@@ -5,12 +5,12 @@ class PostsController extends AppController{
 	public $uses = array('User','Post');
 // 	public $scaffold;
 	
-	function beforeFilter(){
-	 if(!$this->Session->read('user')){
-		$this->Session->setFlash('Please login');
-	 	$this->redirect(array('controller'=>'users','action'=>'login'));
-	}
-	}
+/* 	function beforeFilter(){
+		 if(!$this->Session->read('user')){
+			$this->Session->setFlash('Please login');
+		 	$this->redirect(array('controller'=>'users','action'=>'login'));
+		 }
+	} */
 	function index(){
 /* 		$posts=$this->Post->find('all',array(
 				'order'=>'modified DESC'

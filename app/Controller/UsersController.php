@@ -16,7 +16,7 @@ class UsersController extends AppController{
 		}
 	}
 	
-	function login(){
+/* 	function login(){
 		if(!empty($this->data)){
 			$user=$this->User->findByUsername($this->data['User']['username']);
 			if($user&&md5($this->data['User']['password'])==$user['User']['password']){
@@ -26,7 +26,18 @@ class UsersController extends AppController{
 				$this->set('error',true);
 			}
 		}
+	} */
+	
+	function login(){
+		if($this->request->is('post')){
+			if($this->Auth->login()){
+				$this->redirect($this->Auth->redirect());
+			}else{
+				$this->Session->setFlash($message);
+			}
+		}
 	}
+	
 	
 	function logout(){
 		$this->Session->delete('user');
