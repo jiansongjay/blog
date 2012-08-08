@@ -32,4 +32,11 @@ App::uses('Controller', 'Controller');
  * @link http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
+	
+/* 	function beforeFilter(){
+		if(!$this->Session->read('user')){
+			$this->Session->setFlash('Please login');
+// 			$this->redirect(array('controller'=>'users','action'=>'login'));
+		}
+	} */
 }
