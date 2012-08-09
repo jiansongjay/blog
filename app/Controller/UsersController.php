@@ -3,6 +3,7 @@ class UsersController extends AppController{
 	public $name = 'Users';
 	public $helpers = array('Html','Form');
 	
+
 	
 	function register(){
 		if($this->request->is('post')){
@@ -30,16 +31,12 @@ class UsersController extends AppController{
 	} */
 	
 	function login(){
-		if($this->request->is('post')){
-// 			var_dump($this->Auth->login());
-// 			$this->request->data['User']['password']=AuthComponent::password($this->request->data['User']['password']);
-// 			var_dump($this->Auth->request);
-			
+		if($this->request->is('post')){			
 			if($this->Auth->login()){
-				var_dump($this->Auth->user());
-// 				$this->redirect($this->Auth->redirect());
+				$this->redirect($this->Auth->redirect());
 			}else{
-				$this->Session->setFlash(__('Invalid login.'));
+				$this->Session->setFlash($this->Auth->authError);
+
 			}
 		}
 	}

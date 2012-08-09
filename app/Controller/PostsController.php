@@ -1,13 +1,15 @@
 <?php
 class PostsController extends AppController{
 	public $name = 'Posts';
-	public $helpers = array('Html','Form','Time');
+	public $helpers = array('Html','Form','Time','Js');
 	public $uses = array('User','Post');
+	public $components =array('RequestHandler');
+	
 // 	public $scaffold;
-/* 	function beforeFilter(){
-		$this->Auth->allow('add');
+	function beforeFilter(){
+		$this->Auth->allow('add','viewall');
 		parent::beforeFilter();
-	} */
+	}
 /* 	function beforeFilter(){
 		 if(!$this->Session->read('user')){
 			$this->Session->setFlash('Please login');
@@ -33,6 +35,22 @@ class PostsController extends AppController{
 		} */
 	
 	}
+	
+	function viewall(){
+// 		$this->RequestHandler->setContent('xml','application/xml');
+		$posts=$this->Post->find('all');
+/* 		$this->set('posts',$posts);
+		$this->render(null,'ajax'); */
+
+/* 		$this->set('posts',$posts);
+		$this->set('_serialize ','posts'); */
+/* 		if($this->RequestHandler->ext=='json'){
+			$this->autoRender=false;
+			echo json_encode($posts);
+		} */
+		
+	}
+	
 	
 	function view($id=null){
 		if(!$id){

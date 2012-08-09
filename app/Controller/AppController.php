@@ -34,18 +34,20 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 	public $components = array(
 			'Session',
-			'Auth'
-/* 			'Auth'=>array(
+			'Cookie',
+			'Acl',
+			'Auth'=>array(
 					'loginAction'=>array('controller'=>'users','action'=>'login'),
 					'loginRedirect'=>array('controller'=>'posts','action'=>'index'),
+					'authError'=>'Invalid username/password combination,try again',
 					'logoutRedirect'=>array('controller'=>'users','action'=>'login')
-					) */
+					)
 			);
 	
 	function beforeFilter(){
-		$this->Auth->loginAction=array('controller'=>'users','action'=>'login');
+/* 		$this->Auth->loginAction=array('controller'=>'users','action'=>'login');
 		$this->Auth->loginRedirect=array('controller'=>'posts','action'=>'index');
-		$this->Auth->logoutRedirect=array('controller'=>'users','action'=>'login');
+		$this->Auth->logoutRedirect=array('controller'=>'users','action'=>'login'); */
 		$this->Auth->allowedActions=array('login','logout','register');
 	}
 
