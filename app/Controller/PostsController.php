@@ -96,9 +96,12 @@ class PostsController extends AppController{
 	}
 	
 	function add(){
-		$username=$this->Session->read('user');
-		$user=$this->User->findByUsername($username);
-		$user_id=$user['User']['id'];
+		if($this->Auth->user()){
+			$user=$this->Auth->user();
+			$user_id=$user['id'];
+		}else{
+			$this->redirect(array('controller'=>'users','action'=>'login'));
+		}
 		if($this->request->is('post')){
 			$this->Post->create();
 			$this->request->data['Post']['user_id']=$user_id;
