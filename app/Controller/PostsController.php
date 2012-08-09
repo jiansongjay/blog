@@ -4,7 +4,10 @@ class PostsController extends AppController{
 	public $helpers = array('Html','Form','Time');
 	public $uses = array('User','Post');
 // 	public $scaffold;
-	
+/* 	function beforeFilter(){
+		$this->Auth->allow('add');
+		parent::beforeFilter();
+	} */
 /* 	function beforeFilter(){
 		 if(!$this->Session->read('user')){
 			$this->Session->setFlash('Please login');

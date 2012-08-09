@@ -34,10 +34,19 @@ App::uses('Controller', 'Controller');
 class AppController extends Controller {
 	public $components = array(
 			'Session',
-			'Auth'=>array(
+			'Auth'
+/* 			'Auth'=>array(
+					'loginAction'=>array('controller'=>'users','action'=>'login'),
 					'loginRedirect'=>array('controller'=>'posts','action'=>'index'),
 					'logoutRedirect'=>array('controller'=>'users','action'=>'login')
-					)
+					) */
 			);
+	
+	function beforeFilter(){
+		$this->Auth->loginAction=array('controller'=>'users','action'=>'login');
+		$this->Auth->loginRedirect=array('controller'=>'posts','action'=>'index');
+		$this->Auth->logoutRedirect=array('controller'=>'users','action'=>'login');
+		$this->Auth->allowedActions=array('login','logout','register');
+	}
 
 }

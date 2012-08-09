@@ -3,13 +3,14 @@ class UsersController extends AppController{
 	public $name = 'Users';
 	public $helpers = array('Html','Form');
 	
+	
 	function register(){
 		if($this->request->is('post')){
 			$this->User->create();
-			$this->request->data['User']['password']=md5($this->request->data['User']['password']);
+// 			$this->request->data['User']['password']=md5($this->request->data['User']['password']);
 			if($this->User->save($this->request->data)){
 				$this->Session->setFlash(__('The user has been added.'));
-				$this->redirect(array('action'=>'index'));
+				$this->redirect(array('controller'=>'posts','action'=>'add'));
 			}else{
 				$this->Session->setFlash('Some error happend,try again.');
 			}
@@ -30,19 +31,26 @@ class UsersController extends AppController{
 	
 	function login(){
 		if($this->request->is('post')){
+// 			var_dump($this->Auth->login());
+// 			$this->request->data['User']['password']=AuthComponent::password($this->request->data['User']['password']);
+// 			var_dump($this->Auth->request);
+			
 			if($this->Auth->login()){
-				$this->redirect($this->Auth->redirect());
+				var_dump($this->Auth->user());
+// 				$this->redirect($this->Auth->redirect());
 			}else{
-				$this->Session->setFlash($message);
+				$this->Session->setFlash(__('Invalid login.'));
 			}
 		}
 	}
 	
 	
 	function logout(){
-		$this->Session->delete('user');
-		$this->Session->setFlash(__('Logout successful.'));
-		$this->redirect(array('action'=>'login'));
+// 		$this->Session->delete('user');
+		$this->redirect($this->Auth->logout());
+		
+/* 		$this->Session->setFlash(__('Logout successful.'));
+		$this->redirect(array('action'=>'login')); */
 	}
 	
 	
